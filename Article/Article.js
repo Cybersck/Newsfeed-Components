@@ -85,7 +85,21 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'A compelling title',
+    date: 'Today',
+    firstParagraph: `Some Very interesting information. Some Very interesting information. Some Very interesting information. 
+                    Some Very interesting information. Some Very interesting information. Some Very interesting information. Some Very interesting information. 
+                    Some Very interesting information. Some Very interesting information. Some Very interesting information.`,
+    secondParagraph: `Super cool facts. Super cool facts. Super cool facts. Super cool facts. Super cool facts. Super cool facts. 
+                    Super cool facts. Super cool facts. Super cool facts. Super cool facts. Super cool facts. Super cool facts. Super cool facts. 
+                    Super cool facts. Super cool facts. Super cool facts. Super cool facts. `,
+    thirdParagraph: `Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. 
+                    Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. 
+                    Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. Mind blowing revelation. `
   }
+
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -99,6 +113,47 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
+  */
+
+ function newArticles(data) {
+  const articleContainer = document.createElement('div'),
+  articleTitle = document.createElement('h2'),
+  articleDate = document.createElement('p'),
+  par1 = document.createElement('p'),
+  par2 = document.createElement('p'), 
+  par3 = document.createElement('p'),
+  button = document.createElement('span');
+
+  articleTitle.textContent = data.title;
+  articleDate.textContent = data.date;
+  par1.textContent = data.firstParagraph;
+  par2.textContent = data.secondParagraph;
+  par3.textContent = data.thirdParagraph;
+  button.textContent = 'expand';
+
+  articleContainer.classList.add('article');
+  articleDate.classList.add('date');
+  button.classList.add('expandButton');
+
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate); 
+  articleContainer.appendChild(par1);
+  articleContainer.appendChild(par2);
+  articleContainer.appendChild(par3);
+  articleContainer.appendChild(button);
+  button.addEventListener('click', e => {
+    e.target.parentNode.classList.toggle('article-open');
+  });
+
+  return articleContainer;
+
+}
+const art = document.querySelector('.articles');
+
+data.map((data) => {
+  art.appendChild(newArticles(data));
+});
+  /*
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
